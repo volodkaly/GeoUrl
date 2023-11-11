@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Different form types dynamic processing</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <!--
+Ми можемо створювати двосторонні зв'язки між вхідними даними стану та форми за допомогою директиви v-model.
+-->
+
+<div id="app">
+    <h2>Napište text</h2>
+    <input v-model="text"> {{ text }}
+  
+    <h2>Binární checkbox</h2>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">Zvoleno: {{ checked }}</label>
+  
+    <!--
+      кілька прапорців можуть бути прив'язані
+      до одного значення v-model масиву
+    -->
+    <h2>Kombinovaný checkbox</h2>
+    <input type="checkbox" id="petro" value="Petr" v-model="checkedNames">
+    <label for="petro">Petr</label>
+    <input type="checkbox" id="mary" value="Marie" v-model="checkedNames">
+    <label for="mary">Marie</label>
+    <input type="checkbox" id="iren" value="Irina" v-model="checkedNames">
+    <label for="iren">Irina</label>
+    <p>Označena jména: <pre>{{ checkedNames }}</pre></p>
+  
+    <h2>Radiobox</h2>
+    <input type="radio" id="one" value="Jeden" v-model="picked">
+    <label for="one">Jeden</label>
+    <br>
+    <input type="radio" id="two" value="Dva" v-model="picked">
+    <label for="two">Dva</label>
+    <br>
+    <span>Zvoleno: {{ picked }}</span>
+  
+    <h2>Volba</h2>
+    <select v-model="selected">
+      <option disabled value="">Zvolte jeden, prosím</option>
+      <option>А</option>
+      <option>Б</option>
+      <option>В</option>
+    </select>
+    <span>Zvoleno: {{ selected }}</span>
+  
+    <h2>Volba několika hodnot</h2>
+    <select v-model="multiSelected" multiple style="width:100px">
+      <option>А</option>
+      <option>Б</option>
+      <option>В</option>
+    </select>
+    <span>Zvoleno: {{ multiSelected }}</span>
+  </div>
+
+<script type="module">
+    const {createApp,ref} = Vue
+    
+    createApp({
+      data() {
+        return {
+          text: 'Edituj mě',
+          checked: true,
+          checkedNames: ['Petr'],
+          picked: 'Jeden',
+          selected: 'А',
+          multiSelected: ['А']
+        }
+      }
+    }).mount('#app')
+    </script>
+    
+    
+</body>
+</html>

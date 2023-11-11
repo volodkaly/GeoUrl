@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <form id="search">
+          Vyhledat <input name="query" v-model="searchQuery">
+          <br>
+          <br>
+        </form>
+        
+    
+        <form @submit.prevent="addRow">
+          <label>nazev: <input v-model="newDataRow['nazev']"></label>
+          <br>
+          <br>
+          <label>cena: <input v-model="newDataRow['cena']"></label>
+          <br>
+          <br>
+          <button type="submit">Pridavame do tabulky</button>
+        </form>
+      
+        <demo-grid
+          :data="gridData"
+          :columns="gridColumns"
+          :filter-key="searchQuery">
+        </demo-grid>
+      </div>
+
+    <script type="module">
+       const { createApp,ref } = Vue
+        import DemoGrid from './Grid.js'
+        
+        createApp({
+          components: {
+            DemoGrid
+          },
+          data: () => ({
+            searchQuery: '',
+            gridColumns: ['nazev', 'cena'],
+            gridData: [
+              { 'nazev': 'Чак Норріс', 'cena': Infinity },
+              { 'nazev': 'Брюс Лі', 'cena': 9000 },
+              { 'nazev': 'Джекі Чан', 'cena': 7000 },
+              { 'nazev': 'Джет Лі', 'cena': 8000 }
+            ],
+            newDataRow: { 'nazev': '', 'cena': '' } // nova data z formy
+          }),
+          methods: {
+            addRow() {
+              // kontrola zda vsechna policka jsou vyplnena
+              if (this.newDataRow['nazev'] && this.newDataRow['cena']) {
+                // pridavame novy radek do pole
+                this.gridData.push({
+                  'nazev': this.newDataRow['nazev'],
+                  'cena': parseInt(this.newDataRow['cena'])
+                });
+        
+                // mazeme udaje z formy
+                this.newDataRow['nazev'] = '';
+                this.newDataRow['cena'] = '';
+              } else {
+                alert('Prosím vyplňte všechna políčka.');
+              }
+            }
+          }
+        }).mount('#app')
+        </script>
+        
+        
+</body>
+</html>

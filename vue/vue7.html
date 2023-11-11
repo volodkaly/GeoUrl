@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model="count">
+        <br>
+        {{ count }}
+        <br>
+        <button @click="count=count.slice(0,-1)">видалити останню літеру</button>
+      </div>
+      
+      <script type="module">
+      const { createApp,ref } = Vue
+      
+      createApp({
+        data() {
+          return {
+            count: "kvjnwnejkrvneowrfqc"
+          }
+        }
+      }).mount('#app')
+      </script>
+</body>
+</html>

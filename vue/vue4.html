@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <pre>
+        <!--
+          Зверніть увагу, що нам не потрібен .value всередині
+          шаблонів, оскільки реквізити автоматично
+          "розгортаються" в шаблонах.
+        -->
+        <input v-model="message">
+        <h1>{{ message }}</h1>
+      
+        <!--
+          Прив'язка до методу/функції.
+          Синтаксис @click є скороченням від v-on:click.
+        -->
+        <button @click="reverseMessage">Reverse string</button>
+      
+        <!-- Також може бути вбудованим виразом -->
+        <button @click="message += '\n' + '?'">Add "?"</button>
+      
+        <!--
+          Vue також надає модифікатори для типових завдань,
+          таких як e.preventDefault() і e.stopPropagation()
+        -->
+
+    </pre>
+      </div>
+
+      <script type="module">
+        const { createApp, ref } = Vue
+
+        
+        createApp({
+          data() {
+            return {
+              message: 'Привіт світ!'
+            }
+          },
+          methods: {
+            reverseMessage() {
+              this.message = this.message.split('').reverse().join('')
+            },
+
+          }
+        }).mount('#app')
+        </script>
+
+</body>
+</html>
