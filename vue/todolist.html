@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <input v-model.trim="text" maxlength="200">
+    <br>
+        <button @click="addTask()">add task</button>
+    <br>
+    <div v-for="task in tasks">{{task.number}} {{" | "}} {{task.timestamp}} {{" | "}} {{task.text}} {{" | "}} {{task.isCompleted}}
+        <input type="checkbox" v-model="task.isCompleted">
+        <button @click="deleteTask(task.timestamp)">delete</button>
+        <button >Edit</button>
+<input v-if="task.isEdited" @keyup.enter="edit(task.text)" v-model="editValue">
+    </div>
+    </div>
+    <script>
+    
+new Vue({
+    el:'#app',
+    data:{
+        number: 0,
+        timestamp: null,
+        text: '',
+        isCompleted: false,
+        isEdited: false,
+        editValue: '',
+       tasks: 
+       [
+       {
+        number: 0,
+        timestamp: null,
+        text: 'task text example',
+        isCompleted: true,
+        isEdited: false,
+       }
+        ]
+    },
+    methods:{
+        getCurrentTime(){
+        const currentDate = new Date(); 
+        this.timestamp = currentDate. getTime(); 
+        return this.timestamp;
+        },
+        edit(){
+            return this.editValue;
+        },
+        addTask(){
+            const newTask = {
+                number: this.number + 1,
+                timestamp: this.getCurrentTime(),
+                text: this.text,
+                isCompleted: this.isCompleted,
+                isEdited: this.isEdited
+            }
+            this.tasks.push(newTask);
+            this.text = '';
+            this.number = this.number + 1;
+            this.isCompleted = false,
+            this.isEdited = false
+        },
+       deleteTask(timestamp){
+        this.tasks = this.tasks.filter(task => task.timestamp !== timestamp);
+       }
+
+    }
+})
+    </script>
+</body>
+</html>
