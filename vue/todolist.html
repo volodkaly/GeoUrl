@@ -62,7 +62,12 @@ new Vue({
                 isCompleted: this.isCompleted,
                 isEdited: this.isEdited
             }
+            if (this.text !== ''){
             this.tasks.push(newTask);
+            }
+            else {
+                alert('error: task text field cannot be empty')
+            }
             this.text = '';
             this.number = this.number + 1;
             this.isCompleted = false,
