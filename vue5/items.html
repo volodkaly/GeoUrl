@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        {{$data | json}}
+        Name:
+<input v-model.trim="itemName">
+Price:
+<input v-model.trim="itemPrice">
+Count:
+<input v-model.trim="itemCount">
+<button @click="addItem()">Add item</button>
+
+<table>
+    <thead>
+<td>Name:</td>
+<td>Price:</td>
+<td>Count:</td>
+    </thead>
+    <tbody>
+<tr v-for="item in items">
+    <td>{{item.itemName}}</td>
+    <td>{{item.itemPrice}}</td>
+    <td>{{item.itemCount}}</td>
+</tr>
+    </tbody>
+</table>
+
+    </div>
+
+    <script>
+
+new Vue({
+    el: '#app',
+    data: {
+
+        items: [ 
+        {
+            itemName: 'PC',
+            itemPrice: 1000,
+            itemCount: 0
+        }
+        ]
+    },
+    methods:
+    {
+            addItem(){
+
+                const newItem = {
+                    itemName: this.itemName,
+                    itemPrice: this.itemPrice,
+                    itemCount: this.itemCount
+                }
+                this.items.push(newItem);
+            }        
+
+    }
+});
+</script>
+</body>
+</html>

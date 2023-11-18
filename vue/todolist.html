@@ -13,6 +13,9 @@
     <br>
         <button @click="addTask()">add task</button>
     <br>
+    <div>{{"#"}} {{" | "}} {{"task unique code"}} {{" | "}} {{"task user text"}} {{" | "}} {{"task status"}}
+    </div>
+
     <div v-for="task in tasks">{{task.number}} {{" | "}} {{task.timestamp}} {{" | "}} {{task.text}} {{" | "}} {{task.isCompleted}}
         <input type="checkbox" v-model="task.isCompleted">
         <button @click="deleteTask(task.timestamp)">delete</button>

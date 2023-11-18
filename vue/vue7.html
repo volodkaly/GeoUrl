@@ -14,7 +14,47 @@
         <br>
         <button @click="count=count.slice(0,-1)">видалити останню літеру</button>
       </div>
-      
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+
+</head>
+<body>
+    
+    <div id="app">
+        {{$data | json}}
+        Name:
+<input v-model="itemName">
+Price:
+<input v-model="itemPrice">
+Count:
+<input v-model="itemCount">
+<button @click="addItem()">Add item</button>
+
+<table>
+    <thead>
+<td>Name:</td>
+<td>Price:</td>
+<td>Count:</td>
+    </thead>
+    <tbody>
+<tr v-for="item in items">
+    <td>{{item.itemName}}</td>
+    <td>{{item.itemPrice}}</td>
+    <td>{{item.itemCount}}</td>
+</tr>
+    </tbody>
+</table>
+
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
       <script type="module">
       const { createApp,ref } = Vue
       

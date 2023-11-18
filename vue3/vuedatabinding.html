@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <a :href="link">Link</a>
+        <div v-for="person in people" :style="person.job === 'blow' ? format : {}">
+        <br>
+        <br>
+        {{person.name}}
+        <br>
+        {{person.job}}
+        <br>
+        <br>
+        </div>
+        <div @click.self="style:'font-size: large;'">{{count}}</div>
+        <button @dblclick="count++">Click me</button>
+        <button @mouseover="count--">Click me</button>
+        <button @mouseleave="count=count-10">Click me</button>
+        <input type="text" @keyup.enter="addTen">
+        <br>
+        <input type="checkbox" v-model="checked">
+        <h3>checkbox value: {{checked}}</h3>
+        <br>
+        item name:
+        <input v-model="itemName">
+        <br>
+        <br>
+        item price:
+        <input v-model="itemPrice">
+
+        <button @click="pushItem()">Push item</button>
+
+        <p v-for="item in items">item name: {{item.itemName}}<br> item price: {{item.itemPrice}}</p>
+
+
+        {{$data | json}}
+    </div>
+    
+    
+    <script src="./app.js"></script>
+</body>
+</html>
