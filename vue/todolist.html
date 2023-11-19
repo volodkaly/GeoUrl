@@ -9,18 +9,25 @@
 <body>
 
     <div id="app">
-        <input v-model.trim="text" maxlength="200">
+        <h1>Type in your task here:</h1>
+        <input @keyup.enter="addTask()" v-model.trim="text" maxlength="200">
     <br>
+
         <button @click="addTask()">add task</button>
     <br>
-    <div>{{"#"}} {{" | "}} {{"task unique code"}} {{" | "}} {{"task user text"}} {{" | "}} {{"task status"}}
+    <div>{{"#"}} {{" | "}} {{"task unique timestamp code"}} {{" | "}} {{"task user text"}} {{" | "}} {{"task status"}}
     </div>
 
     <div v-for="task in tasks">{{task.number}} {{" | "}} {{task.timestamp}} {{" | "}} {{task.text}} {{" | "}} {{task.isCompleted}}
         <input type="checkbox" v-model="task.isCompleted">
         <button @click="deleteTask(task.timestamp)">delete</button>
-        <button >Edit</button>
-<input v-if="task.isEdited" @keyup.enter="edit(task.text)" v-model="editValue">
+        <button @click="task.isEdited=!task.isEdited">Edit</button>
+        <div v-if="task.isEdited">
+            <input @keyup.enter="edit(task)" @keyup.esc="task.isEdited=!task.isEdited" v-model.trim="task.editValue">
+            <button @click="edit(task)">Save</button>
+            <button @click="task.isEdited=!task.isEdited">Undo</button>
+        </div>
+
     </div>
     </div>
     <script>
@@ -28,8 +35,8 @@
 new Vue({
     el:'#app',
     data:{
-        number: 0,
-        timestamp: null,
+        number: 1,
+        timestamp: 1111111111111,
         text: '',
         isCompleted: false,
         isEdited: false,
@@ -38,12 +45,14 @@ new Vue({
        [
        {
         number: 0,
-        timestamp: null,
+        timestamp: 1111111111111,
         text: 'task text example',
         isCompleted: true,
         isEdited: false,
+        editValue: '',
        }
         ]
+        
     },
     methods:{
         getCurrentTime(){
@@ -51,16 +60,14 @@ new Vue({
         this.timestamp = currentDate. getTime(); 
         return this.timestamp;
         },
-        edit(){
-            return this.editValue;
-        },
         addTask(){
             const newTask = {
-                number: this.number + 1,
+                number: this.tasks.length,
                 timestamp: this.getCurrentTime(),
                 text: this.text,
                 isCompleted: this.isCompleted,
-                isEdited: this.isEdited
+                isEdited: this.isEdited,
+                editValue: this.text
             }
             if (this.text !== ''){
             this.tasks.push(newTask);
@@ -69,13 +76,18 @@ new Vue({
                 alert('error: task text field cannot be empty')
             }
             this.text = '';
-            this.number = this.number + 1;
+            this.number = 0;
             this.isCompleted = false,
             this.isEdited = false
         },
        deleteTask(timestamp){
         this.tasks = this.tasks.filter(task => task.timestamp !== timestamp);
-       }
+       },
+       edit(task){
+        task.text = task.editValue;
+        task.isEdited = false;
+       },
+       
 
     }
 })
