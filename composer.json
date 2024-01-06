@@ -1,5 +1,5 @@
 {
-    "name": "packagist/route-url-parser",
+    "name": "geo-url-lasac/route-url-parser",
     "description": "2 simple classes to get an array of waypoints encoded in the url. And to get an url from the array of points back",
     "require": {
         "php": ">=5.6",
