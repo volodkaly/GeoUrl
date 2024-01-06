@@ -1,0 +1,20 @@
+{
+    "name": "packagist/route-url-parser",
+    "description": "2 simple classes to get an array of waypoints encoded in the url. And to get an url from the array of points back",
+    "require": {
+        "php": ">=5.6",
+        "another-vendor/package": "1.*"
+    },
+    "authors": [{
+    "name": "Vladimir Lasac",
+    "role": "Developer"
+        }],
+    "license": "MIT",
+      "require": {},
+  "autoload": {
+    "psr-4": {
+      "Vendor\\PackageName\\": "./"
+    }
+  }
+
+}
