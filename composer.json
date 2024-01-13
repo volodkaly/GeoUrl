@@ -1,5 +1,5 @@
 {
-    "name": "volodkaly/route-url-parser",
+    "name": "vladimir/my-web-app",
     "description": "2 simple classes to get an array of waypoints encoded in the url. And to get an url from the array of points back",
     "require": {
         "php": ">=5.6",
