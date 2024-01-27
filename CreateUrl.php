@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\PackageName;
+namespace VladimirLasac\GeoUrl;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
